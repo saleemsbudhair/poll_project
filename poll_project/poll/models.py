@@ -8,7 +8,6 @@ class Poll(models.Model):
 
 
 class PollOption(models.Model):
-
     name = models.CharField(max_length=30)
     poll = models.ForeignKey(Poll, on_delete=models.CASCADE, related_name='options')
     date_created = models.DateTimeField(auto_now_add=True)

@@ -5,29 +5,23 @@
 
 {% block main %}
 <div class="row">
-    <div class="col-lg-10 col-lg-offset-1">
-        <div class="panel panel-default">
+    <div class="col-lg-12">
+        <div class="panel panel-default p-2 card">
             <div class="panel-heading">
                 <h3 class="panel-title">Create A New Poll</h3>
             </div>
-                
+
             <form method="POST">
                 {% csrf_token %}
-                {% if error %}
-                <div class="alert alert-danger" role="alert">
-                    {{error}}
-                </div>
-                {% endif %}
-
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-lg-6">
-                            <div class="form-group">
+                            <div class="form-group question_input">
                                 <label for="id_question">
                                     Enter Poll Question
-                                        <span style="color:#FF0000">*</span>
+                                    <span style="color:#FF0000">*</span>
                                 </label>
-                                {% bootstrap_field form.question class="form-control" rows="3" show_label=False %}
+                                {% bootstrap_field form.question class="form-control" rows="3" show_label=False error_css_class='text-danger' %}
                             </div>
                         </div>
                         <div class="col-lg-6">
@@ -35,20 +29,20 @@
                                 <div class="row">
                                     <div class="col-lg-12">
                                         <div class="form-group">
-                                        <label for="id_option_1">
-                                            Option one
+                                            <label for="id_option_1">
+                                                Option one
                                                 <span style="color:#FF0000">*</span>
-                                        </label>
-                                            {% bootstrap_field form.option_1 class="form-control" show_label=False %}
+                                            </label>
+                                            {% bootstrap_field form.option_1 class="form-control" show_label=False error_css_class='text-danger' %}
                                         </div>
                                     </div>
                                     <div class="col-lg-12">
                                         <div class="form-group">
-                                        <label for="id_option_2">
-                                            Option one
+                                            <label for="id_option_2">
+                                                Option Two
                                                 <span style="color:#FF0000">*</span>
-                                        </label>
-                                            {% bootstrap_field form.option_2 class="form-control" show_label=False %}
+                                            </label>
+                                            {% bootstrap_field form.option_2 class="form-control" show_label=False  error_css_class='text-danger' %}
                                         </div>
                                     </div>
                                     <div class="col-lg-12">
@@ -56,19 +50,19 @@
                                             {% bootstrap_field form.option_3 class="form-control" %}
                                         </div>
                                     </div>
-                                   <div class="col-lg-12">
+                                    <div class="col-lg-12">
                                         <div class="form-group">
                                             {% bootstrap_field form.option_4 class="form-control" %}
                                         </div>
                                     </div>
+                                </div>
+
                             </div>
 
                         </div>
-
-                    </div>
                     </div>
                     <div class="row">
-                        <hr />
+                        <hr/>
                         <div class="col-lg-6">
                             <button type="submit" class="btn btn-info">Create</button>
                             <span style="color:#FF0000">* indicates a required filed</span>

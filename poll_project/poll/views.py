@@ -1,8 +1,8 @@
 import django.db.models
-from django.shortcuts import render ,redirect
+from django.shortcuts import render, redirect
+
 from .forms import CreatePollForm
 from .models import Poll, PollOption, Vote
-from django.http import HttpResponse
 
 
 def home(request):
@@ -13,16 +13,15 @@ def home(request):
         'polls': most_recent_pools,
         'top_3_polls': top_3_polls,
     }
-    return render(request, 'poll/home.html',context)
+    return render(request, 'poll/home.html', context)
 
 
 def create(request):
-
     if request.method == 'POST':
         form = CreatePollForm(request.POST)
         if form.is_valid():
             question = form.cleaned_data['question']
-            poll =Poll.objects.create(question=question)
+            poll = Poll.objects.create(question=question)
             option_1 = PollOption.objects.create(name=form.cleaned_data['option_1'], poll=poll)
             option_2 = PollOption.objects.create(name=form.cleaned_data['option_2'], poll=poll)
             if form.cleaned_data['option_3']:
@@ -35,33 +34,34 @@ def create(request):
                 'form': form,
 
             }
-            return render(request,'poll/create.html',context)
-            # print(form.cleaned_data['question'])
+            return render(request, 'poll/create.html', context)
     else:
         form = CreatePollForm()
         context = {
             'form': form
         }
 
-        return render(request, 'poll/create.html',context)
+        return render(request, 'poll/create.html', context)
 
-def vote(request,poll_id):
+
+def vote(request, poll_id):
     poll = Poll.objects.get(pk=poll_id)
 
     if request.method == 'POST':
         selected_option = request.POST['poll']
         poll_option = PollOption.objects.get(pk=selected_option)
-        vote = Vote.objects.create(poll=poll, poll_option=poll_option)
+        Vote.objects.create(poll=poll, poll_option=poll_option)
         return redirect('results', poll.id)
 
     context = {
         'poll': poll
     }
-    return render(request, 'poll/vote.html',context)
+    return render(request, 'poll/vote.html', context)
 
-def results(request,poll_id):
+
+def results(request, poll_id):
     poll = Poll.objects.get(pk=poll_id)
     context = {
-        'poll':poll,
+        'poll': poll,
     }
     return render(request, 'poll/results.html', context)

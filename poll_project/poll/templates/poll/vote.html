@@ -5,30 +5,38 @@
 {% block main %}
 <div class="row">
     <div class="col-lg-12">
-        <div class="panel panel-default">
+        <div class="panel panel-default card">
             <div class="panel-body">
                 <div class="row">
                     <div class="col-lg-12">
                         <h1 class="head-title">{{ poll.question }}</h1>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-12">
+        <div class="panel panel-default mt-5 card pb-3">
+            <div class="panel-body">
                 <div class="row">
                     <div class="col-lg-12">
-                        <hr />
                         <form method="POST" class="col-lg-12" style="text-align: center">
                             {% csrf_token %}
                             <div class="form-group col-lg-12">
-                                <div id="vote" class="col-lg-12">
+                                <div id="vote" class="col-lg-12 justify-content-around d-flex">
                                     {% for poll_option in poll.options.all %}
-                                        <label class="purple"><input class="col-lg-12" style="display:none" type="radio" value="{{poll_option.pk}}" name="poll" required><span> Vote {{ poll_option.name }}</span></label>
+                                        <div class="card pb-3 px-5 pt-1 w-100 mr-4">
+                                            <h3>{{poll_option.name}}</h3>
+                                            <div class="text-center d-flex justify-content-center">
+                                                    <button class="btn d-flex p-1 mt-4 px-3 vote-option-{{forloop.counter}}" name="poll" type="submit" value="{{poll_option.id}}">Vote {{poll_option.name }}</button>
+                                                </div>
+                                            </div>
+
                                     {% endfor %}
                                 </div>
                             </div>
-                            <hr/>
                             <br>
-                            <button type="submit" class="btn btn-info">
-                                Vote
-                            </button>
+
                         </form>
                     </div>
                 </div>

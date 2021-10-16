@@ -1,5 +1,6 @@
-import  django.forms
-from .models import Poll
+import django.forms
+
+from . import models
 
 
 class CreatePollForm(django.forms.Form):
@@ -8,3 +9,9 @@ class CreatePollForm(django.forms.Form):
     option_2 = django.forms.CharField(label='Option two', required=True)
     option_3 = django.forms.CharField(label='Option three',required=False)
     option_4 = django.forms.CharField(label='Option four',required=False)
+
+    def clean_question(self):
+        value = self.data['question']
+        if models.Poll.objects.filter(question__iexact=value).exists():
+            self.add_error('question', 'Question should be unique.')
+        return value

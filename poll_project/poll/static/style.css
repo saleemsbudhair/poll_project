@@ -35,14 +35,7 @@ a.navbar-brand, .panel-title {
     color: #as2133  ;
 }
 
-.list-group{
-    max-height: 400px;
-    margin-bottom: 10px;
-    overflow:auto;
-    overflow-y:auto;
-    overflow-x:auto;
-    -webkit-overflow-scrolling: touch;
-}
+
 .head-title {
     text-align:center
 }
@@ -86,8 +79,32 @@ body {
 }
 
 
-#vote .purple {
-    background-color:#B399FF;
+#vote .vote-option-1 {
+    background-color: rgba(255, 99, 132);
     color:#fff;
+}
+
+#vote .vote-option-2 {
+    background-color: rgba(54, 162, 235);
+    color:#fff;
+}
+
+
+#vote .vote-option-3 {
+
+
+
+    background-color: rgba(255, 206, 86);
+    color:#fff;
+}
+
+
+#vote .vote-option-4 {
+    background-color: rgba(75, 192, 192);;
+    color:#fff;
+}
+
+.question_input .invalid-feedback{
+    display: block !important;
 }
 input [type="radio"] { display:none; }
