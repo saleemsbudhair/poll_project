@@ -26,9 +26,10 @@ SECRET_KEY = 'django-insecure-89u0#)mewg-dkb$09ip22oir6*%vgz-nc5^83cz%^o+^ksht3d
 DEBUG = os.environ.get('DEBUG', True)
 
 ALLOWED_HOSTS = ['*']
-STATIC_ROOT = ".static/"
+STATIC_ROOT = BASE_DIR / "static"
+STATIC_URL = '/static/'
 STATICFILES_DIRS = [
-    BASE_DIR / "static",
+    BASE_DIR / "poll_project/static",
 ]
 
 # Application definition
