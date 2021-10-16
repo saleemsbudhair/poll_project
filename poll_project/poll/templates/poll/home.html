@@ -1,0 +1,48 @@
+{% extends "poll/base.html" %}
+{% load humanize %}
+
+{% block title %}Homepage{% endblock %}
+
+{% block main %}
+<div class="row">
+    <div class="col-lg-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Top 3 Polls</h3>
+            </div>
+            <ul class="list-group">
+                {% for poll in top_3_polls %}
+                    <li class="list-group-item">
+                        <a href="{% url 'vote' poll.id %}" ><h4>{{ poll.question }}</h4></a>
+                        {% for poll_option in poll.options.all %}
+                                <span >{{ poll_option.name }} : <strong>{{ poll_option.votes.count }}</strong></span>
+                        {% endfor %}
+                        <br>
+                        <p class="relative-time" > ( {{ poll.date_created|naturaltime  }} )</p>
+<!--                        <a href="{% url 'results' poll.id %}" class="btn btn-default btn-xs">View Results</a> &nbsp;-->
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Recent Polls</h3>
+            </div>
+            <ul class="list-group" >
+                {% for poll in polls %}
+                    <li class="list-group-item">
+                        <a href="{% url 'vote' poll.id %}" ><h4>{{ poll.question }}</h4></a>
+                        {% for poll_option in poll.options.all %}
+                                <span >{{ poll_option.name }} : <strong>{{ poll_option.votes.count }}</strong></span>
+                        {% endfor %}
+                        <br>
+                        <p class="relative-time"> ( {{ poll.date_created|naturaltime  }} )</p>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}
